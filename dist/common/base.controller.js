@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseController = void 0;
 const express_1 = require("express");
+;
 class BaseController {
     constructor(logger) {
         this.logger = logger;
