@@ -23,7 +23,8 @@ export class UsersController extends BaseController implements IUsersController 
 			{
 				path: '/login',
 				func: this.login,
-				method: 'get',
+				method: 'post',
+				middlewares: [new ValidateMiddleware(UserLoginDto)],
 			},
 			{
 				path: '/register',
@@ -34,7 +35,11 @@ export class UsersController extends BaseController implements IUsersController 
 		]);
 	}
 
-	login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction) {
+	async login({ body }: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction) {
+		const isValidUser = await this.UsersService.validateUser(body);
+		if (isValidUser) {
+			return res.status(200).send('Вы авторизованы');
+		}
 		next(new HTTPError(401, 'login error', 'login'));
 	}
 
@@ -43,6 +48,6 @@ export class UsersController extends BaseController implements IUsersController 
 		if (!user) {
 			return next(new HTTPError(422, 'Юзер существует'));
 		}
-		this.ok(res, user);
+		this.ok(res, { email: user.email, id: user.id });
 	}
 }
