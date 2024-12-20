@@ -7,6 +7,7 @@ import { inject, injectable } from 'inversify';
 import { TYPES } from './types/types';
 import { IExceptionFilter } from './errors/exception.interface';
 import { IUsersController } from './users/users.interface';
+import { json } from 'body-parser';
 
 @injectable()
 export class App {
@@ -23,6 +24,10 @@ export class App {
 		this.port = 8000;
 	}
 
+	useMiddleware() {
+		this.app.use(json());
+	}
+
 	useRoutes() {
 		this.app.use('/users', this.UsersController.router);
 	}
@@ -33,6 +38,7 @@ export class App {
 	}
 
 	public init() {
+		this.useMiddleware();
 		this.useRoutes();
 		this.useExceptionFilter();
 		this.server = this.app.listen(this.port);

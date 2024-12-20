@@ -17,3 +17,4 @@ class LoggerService {
     }
 }
 exports.LoggerService = LoggerService;
+//# sourceMappingURL=logger.service.js.map

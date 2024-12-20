@@ -24,22 +24,22 @@ let UsersController = class UsersController extends base_controller_1.BaseContro
         this.loggerService = loggerService;
         this.bindRoutes([
             {
-                path: "/login",
+                path: '/login',
                 func: this.login,
-                method: "get",
+                method: 'get',
             },
             {
-                path: "/test",
+                path: '/test',
                 func: this.test,
-                method: "post",
+                method: 'post',
             },
         ]);
     }
     login(req, res, next) {
-        next(new http_error_class_1.HTTPError(401, "login error", "login"));
+        next(new http_error_class_1.HTTPError(401, 'login error', 'login'));
     }
     test(req, res, next) {
-        this.ok(res, "test");
+        this.ok(res, 'test');
     }
 };
 exports.UsersController = UsersController;
@@ -48,3 +48,4 @@ exports.UsersController = UsersController = __decorate([
     __param(0, (0, inversify_1.inject)(types_1.TYPES.ILogger)),
     __metadata("design:paramtypes", [Object])
 ], UsersController);
+//# sourceMappingURL=users.controller.js.map

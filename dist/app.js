@@ -29,10 +29,10 @@ let App = class App {
         this.port = 8000;
     }
     useRoutes() {
-        this.app.use("/users", this.UsersController.router);
+        this.app.use('/users', this.UsersController.router);
     }
     useExceptionFilter() {
-        console.log("login errors");
+        console.log('login errors');
         this.app.use(this.ExceptionFilter.catch.bind(this.ExceptionFilter));
     }
     init() {
@@ -50,3 +50,4 @@ exports.App = App = __decorate([
     __param(2, (0, inversify_1.inject)(types_1.TYPES.IExceptionFilter)),
     __metadata("design:paramtypes", [Object, Object, Object])
 ], App);
+//# sourceMappingURL=app.js.map

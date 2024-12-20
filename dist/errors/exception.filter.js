@@ -38,3 +38,4 @@ exports.ExceptionFilter = ExceptionFilter = __decorate([
     __param(0, (0, inversify_1.inject)(types_1.TYPES.ILogger)),
     __metadata("design:paramtypes", [Object])
 ], ExceptionFilter);
+//# sourceMappingURL=exception.filter.js.map

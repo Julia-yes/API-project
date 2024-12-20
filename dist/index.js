@@ -22,3 +22,4 @@ function main() {
     return { appContainer, app };
 }
 _a = main(), exports.appContainer = _a.appContainer, exports.app = _a.app;
+//# sourceMappingURL=index.js.map
