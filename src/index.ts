@@ -9,12 +9,17 @@ import { IExceptionFilter } from './errors/exception.interface';
 import { IUsersController } from './users/users.interface';
 import { IUserService } from './users/users.service.interface';
 import { UserService } from './users/users.service';
+import { IConfigService } from './config/config.service.interface';
+import { ConfigService } from './config/config.service';
+import { PrismaService } from './database/prisma.service';
 
 const appBindings = new ContainerModule((bind: interfaces.Bind) => {
-	bind<ILogger>(TYPES.ILogger).to(LoggerService);
+	bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
 	bind<IExceptionFilter>(TYPES.IExceptionFilter).to(ExceptionFilter);
 	bind<IUsersController>(TYPES.IUsersController).to(UsersController);
 	bind<IUserService>(TYPES.IUsersService).to(UserService);
+	bind<PrismaService>(TYPES.PrismaService).to(PrismaService);
+	bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
 	bind<App>(TYPES.Application).to(App);
 });
 

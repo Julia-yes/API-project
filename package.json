@@ -8,6 +8,7 @@
 		"start": "node ./dist/index.js",
 		"dev": "nodemon",
 		"dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/index.ts",
+		"generate": "prisma generate",
 		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "eslint ./src/**",
@@ -16,6 +17,7 @@
 	"author": "Yuliya Balonikava",
 	"license": "ISC",
 	"dependencies": {
+		"@prisma/client": "^6.1.0",
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.20.3",
 		"class-transformer": "^0.5.1",
@@ -37,6 +39,7 @@
 		"eslint-plugin-prettier": "^5.2.1",
 		"nodemon": "^3.1.9",
 		"prettier": "^3.4.2",
+		"prisma": "^6.1.0",
 		"ts-node": "^10.9.2",
 		"typescript-eslint": "^8.18.1"
 	}
