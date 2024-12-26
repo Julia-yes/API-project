@@ -25,6 +25,7 @@ export class UserService implements IUserService {
 			return this.usersRepository.create(user);
 		}
 	}
+
 	async validateUser({ email, password }: UserLoginDto) {
 		const existedUser = await this.usersRepository.find(email);
 		if (!existedUser) {
@@ -32,5 +33,10 @@ export class UserService implements IUserService {
 		}
 		const newUser = new User(existedUser.name, existedUser.email, existedUser.password);
 		return newUser.comparePassword(password);
+	}
+
+	async getUserInfo(email: string) {
+		const userData = await this.usersRepository.find(email);
+		return userData;
 	}
 }

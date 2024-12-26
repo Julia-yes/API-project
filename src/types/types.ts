@@ -8,3 +8,8 @@ export const TYPES = {
 	PrismaService: Symbol.for('PrismaService'),
 	IUsersRepository: Symbol.for('IUsersRepository'),
 };
+
+export type TJWTData = {
+	email: string;
+	ait: number;
+};

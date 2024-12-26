@@ -1,6 +1,5 @@
 import { Server } from 'http';
 import express, { Express } from 'express';
-import { UsersController } from './users/users.controller';
 import { ILogger } from './logger/logger.interface';
 import 'reflect-metadata';
 import { inject, injectable } from 'inversify';
@@ -10,6 +9,7 @@ import { IUsersController } from './users/users.interface';
 import { json } from 'body-parser';
 import { IConfigService } from './config/config.service.interface';
 import { PrismaService } from './database/prisma.service';
+import { AuthMiddleware } from './common/auth.middleware';
 
 @injectable()
 export class App {
@@ -21,7 +21,7 @@ export class App {
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.IUsersController) private UsersController: IUsersController,
 		@inject(TYPES.IExceptionFilter) private ExceptionFilter: IExceptionFilter,
-		@inject(TYPES.IConfigService) private ConfigService: IConfigService,
+		@inject(TYPES.IConfigService) private configService: IConfigService,
 		@inject(TYPES.PrismaService) private PrismaService: PrismaService,
 	) {
 		this.app = express();
@@ -30,6 +30,8 @@ export class App {
 
 	useMiddleware() {
 		this.app.use(json());
+		const authMiddleware = new AuthMiddleware(this.configService.get('SECRET'));
+		this.app.use(authMiddleware.execute.bind(authMiddleware));
 	}
 
 	useRoutes() {
@@ -37,7 +39,6 @@ export class App {
 	}
 
 	useExceptionFilter() {
-		console.log('login errors');
 		this.app.use(this.ExceptionFilter.catch.bind(this.ExceptionFilter));
 	}
 
