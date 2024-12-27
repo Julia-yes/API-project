@@ -42,12 +42,16 @@ export class App {
 		this.app.use(this.ExceptionFilter.catch.bind(this.ExceptionFilter));
 	}
 
-	public init() {
+	public async init() {
 		this.useMiddleware();
 		this.useRoutes();
 		this.useExceptionFilter();
-		this.PrismaService.connect();
+		await this.PrismaService.connect();
 		this.server = this.app.listen(this.port);
 		this.logger.log(`Сервер запущен на localhost:${this.port}`);
+	}
+
+	public close() {
+		this.server.close();
 	}
 }

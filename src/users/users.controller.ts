@@ -51,8 +51,9 @@ export class UsersController extends BaseController implements IUsersController 
 		if (isValidUser) {
 			const jwt = await this.signJWT(body.email);
 			return this.ok(res, { jwt });
+		} else {
+			next(new HTTPError(401, 'login error', 'login'));
 		}
-		next(new HTTPError(401, 'login error', 'login'));
 	}
 
 	async register({ body }: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction) {

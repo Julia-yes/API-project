@@ -6,7 +6,6 @@ import { IUserService } from './users.service.interface';
 import { TYPES } from '../types/types';
 import { IConfigService } from '../config/config.service.interface';
 import { IUsersRepository } from './repository.interface';
-import { hash } from 'bcryptjs';
 
 @injectable()
 export class UserService implements IUserService {
@@ -14,6 +13,7 @@ export class UserService implements IUserService {
 		@inject(TYPES.IConfigService) private configService: IConfigService,
 		@inject(TYPES.IUsersRepository) private usersRepository: IUsersRepository,
 	) {}
+
 	async createUser({ email, name, password }: UserRegisterDto) {
 		const user = new User(name, email);
 		const salt = this.configService.get('SALT');
